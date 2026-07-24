@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: LM Studio Local Server Anthropic Compatibility Chat API
+  version: 1.0.0-beta
+  description: 'LM Studio runs large language models locally and exposes a local HTTP server with three families of endpoints: the native LM Studio REST API (beta) under `/api/v1`, an OpenAI-compatible surface under `/v1`, and an Anthropic-compatible surface (`/v1/messages`). The server runs on the developer''s own machine (default `http://localhost:1234`). The native `/api/v1` API adds LM Studio-specific capabilities such as MCP via API, stateful chats, model download/load/unload, generation stats (tokens-per-second, time-to-first-token), and optional API-token authentication. Endpoints and paths are transcribed from the public LM Studio developer documentation; request/response bodies follow the documented OpenAI-style message shapes.'
+  contact:
+    name: LM Studio
+    url: https://lmstudio.ai/docs
+  license:
+    name: Proprietary (LM Studio application)
+    url: https://lmstudio.ai/terms
+  x-provenance:
+    method: generated
+    source: https://lmstudio.ai/docs/app/api/endpoints/rest
+    generated: '2026-07-20'
+servers:
+- url: http://localhost:1234
+  description: Default local LM Studio server (bind host/port configurable)
+tags:
+- name: Chat
+  description: Native LM Studio chat inference with generation stats.
+paths:
+  /api/v1/chat:
+    post:
+      tags:
+      - Chat
+      operationId: createChat
+      summary: Run chat inference (native)
+      description: Native LM Studio chat completion. Supports streaming, tool/function calling, structured output via JSON schema, and returns LM Studio generation stats.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Chat completion result with generation stats.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Identifier of a loaded model.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        stream:
+          type: boolean
+          default: false
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+        tools:
+          type: array
+          items:
+            type: object
+        response_format:
+          type: object
+          description: Structured-output enforcement via JSON schema.
+      required:
+      - model
+      - messages
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    GenerationStats:
+      type: object
+      description: LM Studio generation performance metrics.
+      properties:
+        tokens_per_second:
+          type: number
+        time_to_first_token:
+          type: number
+        generation_time:
+          type: number
+        stop_reason:
+          type: string
+    ChatResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/Message'
+              finish_reason:
+                type: string
+        stats:
+          $ref: '#/components/schemas/GenerationStats'
+        usage:
+          type: object
+          properties:
+            prompt_tokens:
+              type: integer
+            completion_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+      required:
+      - role
+      - content
+  responses:
+    NotFound:
+      description: The referenced model or resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: A required API token was missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or referenced an unavailable model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiToken:
+      type: http
+      scheme: bearer
+      description: Optional API token. The native `/api/v1` server can be configured to require a bearer token; by default the local server accepts unauthenticated requests from the loopback interface.

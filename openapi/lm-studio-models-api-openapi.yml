@@ -1,0 +1,212 @@
+openapi: 3.1.0
+info:
+  title: LM Studio Local Server Anthropic Compatibility Models API
+  version: 1.0.0-beta
+  description: 'LM Studio runs large language models locally and exposes a local HTTP server with three families of endpoints: the native LM Studio REST API (beta) under `/api/v1`, an OpenAI-compatible surface under `/v1`, and an Anthropic-compatible surface (`/v1/messages`). The server runs on the developer''s own machine (default `http://localhost:1234`). The native `/api/v1` API adds LM Studio-specific capabilities such as MCP via API, stateful chats, model download/load/unload, generation stats (tokens-per-second, time-to-first-token), and optional API-token authentication. Endpoints and paths are transcribed from the public LM Studio developer documentation; request/response bodies follow the documented OpenAI-style message shapes.'
+  contact:
+    name: LM Studio
+    url: https://lmstudio.ai/docs
+  license:
+    name: Proprietary (LM Studio application)
+    url: https://lmstudio.ai/terms
+  x-provenance:
+    method: generated
+    source: https://lmstudio.ai/docs/app/api/endpoints/rest
+    generated: '2026-07-20'
+servers:
+- url: http://localhost:1234
+  description: Default local LM Studio server (bind host/port configurable)
+tags:
+- name: Models
+  description: List, load, unload, and download local models.
+paths:
+  /api/v1/models:
+    get:
+      tags:
+      - Models
+      operationId: listModels
+      summary: List loaded and downloaded models
+      responses:
+        '200':
+          description: List of models known to this LM Studio instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/models/load:
+    post:
+      tags:
+      - Models
+      operationId: loadModel
+      summary: Load a model into memory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelLoadRequest'
+      responses:
+        '200':
+          description: Model load acknowledged.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/models/unload:
+    post:
+      tags:
+      - Models
+      operationId: unloadModel
+      summary: Unload a model from memory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelUnloadRequest'
+      responses:
+        '200':
+          description: Model unload acknowledged.
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/models/download:
+    post:
+      tags:
+      - Models
+      operationId: downloadModel
+      summary: Download a model from the LM Studio / Hugging Face catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelDownloadRequest'
+      responses:
+        '200':
+          description: Download started.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/v1/models/download/status:
+    get:
+      tags:
+      - Models
+      operationId: getDownloadStatus
+      summary: Check model download progress
+      responses:
+        '200':
+          description: Current download progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadStatus'
+components:
+  schemas:
+    ModelUnloadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+      required:
+      - model
+    ModelList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    DownloadStatus:
+      type: object
+      properties:
+        model:
+          type: string
+        progress:
+          type: number
+        state:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    ModelLoadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Model key/identifier to load.
+        config:
+          type: object
+          description: Optional load configuration (context length, GPU offload).
+      required:
+      - model
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        type:
+          type: string
+          enum:
+          - llm
+          - embeddings
+          - vlm
+        arch:
+          type: string
+        state:
+          type: string
+          enum:
+          - loaded
+          - not-loaded
+        max_context_length:
+          type: integer
+    ModelDownloadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Model identifier / Hugging Face repo to download.
+      required:
+      - model
+  responses:
+    NotFound:
+      description: The referenced model or resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: A required API token was missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or referenced an unavailable model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiToken:
+      type: http
+      scheme: bearer
+      description: Optional API token. The native `/api/v1` server can be configured to require a bearer token; by default the local server accepts unauthenticated requests from the loopback interface.
