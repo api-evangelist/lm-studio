@@ -1,22 +1,137 @@
 aid: lm-studio
 name: LM Studio
-description: 'LM Studio is a company surfaced as a portfolio company of matrix-partners and added to the
-  API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  LM Studio is a desktop application for discovering, downloading, and running large
+  language models (Llama, DeepSeek, Phi, Qwen, gpt-oss, and others) locally on macOS,
+  Windows, and Linux. It runs GGUF and MLX models via llama.cpp and Apple's MLX engine,
+  and ships a local HTTP server that developers can drive from their own apps: a native
+  LM Studio REST API (beta) under /api/v1 with generation stats, model load/unload/download
+  and MCP-via-API, an OpenAI-compatible surface under /v1 (chat/completions, completions,
+  embeddings, models, responses), and an Anthropic-compatible /v1/messages endpoint. It is
+  complemented by Python (lmstudio) and TypeScript (@lmstudio/sdk) SDKs, the MIT-licensed
+  lms command-line tool, headless/daemon operation, LM Link cross-device routing, and MCP
+  host support. Backed by Matrix Partners.
 url: https://raw.githubusercontent.com/api-evangelist/lm-studio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - matrix-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://files.lmstudio.ai/bionic/lm-studio-bionic-og.jpg
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Ai
-apis: []
+- Local LLM
+- Machine Learning
+- Inference
+- Developer Tools
+- LLM
+- MCP
+- SDK
+- Desktop Application
+apis:
+- aid: lm-studio:lm-studio-anthropic-compatibility-api
+  name: LM Studio Anthropic Compatibility API
+  description: Anthropic-compatible messages endpoint.
+  humanURL: https://lmstudio.ai/docs/app/api/endpoints/rest
+  baseURL: http://localhost:1234
+  tags:
+  - Anthropic Compatibility
+  properties:
+  - type: OpenAPI
+    url: openapi/lm-studio-anthropic-compatibility-api-openapi.yml
+  - type: Authentication
+    url: authentication/lm-studio-authentication.yml
+  - type: Conventions
+    url: conventions/lm-studio-conventions.yml
+  - type: ErrorCatalog
+    url: errors/lm-studio-problem-types.yml
+  - type: DataModel
+    url: data-model/lm-studio-data-model.yml
+  - type: Conformance
+    url: conformance/lm-studio-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/lm-studio-lifecycle.yml
+- aid: lm-studio:lm-studio-chat-api
+  name: LM Studio Chat API
+  description: Native LM Studio chat inference with generation stats.
+  humanURL: https://lmstudio.ai/docs/app/api/endpoints/rest
+  baseURL: http://localhost:1234
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/lm-studio-chat-api-openapi.yml
+  - type: Authentication
+    url: authentication/lm-studio-authentication.yml
+  - type: Conventions
+    url: conventions/lm-studio-conventions.yml
+  - type: ErrorCatalog
+    url: errors/lm-studio-problem-types.yml
+  - type: DataModel
+    url: data-model/lm-studio-data-model.yml
+  - type: Conformance
+    url: conformance/lm-studio-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/lm-studio-lifecycle.yml
+- aid: lm-studio:lm-studio-models-api
+  name: LM Studio Models API
+  description: List, load, unload, and download local models.
+  humanURL: https://lmstudio.ai/docs/app/api/endpoints/rest
+  baseURL: http://localhost:1234
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/lm-studio-models-api-openapi.yml
+  - type: Authentication
+    url: authentication/lm-studio-authentication.yml
+  - type: Conventions
+    url: conventions/lm-studio-conventions.yml
+  - type: ErrorCatalog
+    url: errors/lm-studio-problem-types.yml
+  - type: DataModel
+    url: data-model/lm-studio-data-model.yml
+  - type: Conformance
+    url: conformance/lm-studio-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/lm-studio-lifecycle.yml
+- aid: lm-studio:lm-studio-openai-compatibility-api
+  name: LM Studio OpenAI Compatibility API
+  description: OpenAI-compatible endpoints for reuse of existing OpenAI clients.
+  humanURL: https://lmstudio.ai/docs/app/api/endpoints/rest
+  baseURL: http://localhost:1234
+  tags:
+  - OpenAI Compatibility
+  properties:
+  - type: OpenAPI
+    url: openapi/lm-studio-openai-compatibility-api-openapi.yml
+  - type: Authentication
+    url: authentication/lm-studio-authentication.yml
+  - type: Conventions
+    url: conventions/lm-studio-conventions.yml
+  - type: ErrorCatalog
+    url: errors/lm-studio-problem-types.yml
+  - type: DataModel
+    url: data-model/lm-studio-data-model.yml
+  - type: Conformance
+    url: conformance/lm-studio-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/lm-studio-lifecycle.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +140,56 @@ maintainers:
 common:
 - type: Website
   url: https://lmstudio.ai
+- type: DeveloperPortal
+  url: https://lmstudio.ai/docs
+- type: Documentation
+  url: https://lmstudio.ai/docs
+- type: APIReference
+  url: https://lmstudio.ai/docs/app/api/endpoints/rest
+- type: GettingStarted
+  url: https://lmstudio.ai/docs/app
+- type: Blog
+  url: https://lmstudio.ai/blog
+- type: GitHubOrganization
+  url: https://github.com/lmstudio-ai
+- type: Support
+  url: https://github.com/lmstudio-ai/lmstudio-bug-tracker
+- type: TermsOfService
+  url: https://lmstudio.ai/terms
+- type: PrivacyPolicy
+  url: https://lmstudio.ai/privacy
+- type: Packages
+  url: packages/lm-studio-packages.yml
+- type: SDKs
+  url: packages/lm-studio-packages.yml
+- type: CLI
+  url: cli/lm-studio-cli.yml
+- type: MCPServer
+  url: mcp/lm-studio-mcp.yml
+- type: Authentication
+  url: authentication/lm-studio-authentication.yml
+- type: Conventions
+  url: conventions/lm-studio-conventions.yml
+- type: ErrorCatalog
+  url: errors/lm-studio-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/lm-studio-lifecycle.yml
+- type: Conformance
+  url: conformance/lm-studio-conformance.yml
+- type: DataModel
+  url: data-model/lm-studio-data-model.yml
+- type: LLMsTxt
+  url: llms/lm-studio-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: VulnerabilityDisclosure
+  url: security/lm-studio-vulnerability-disclosure.yml
+- type: Security
+  url: https://lmstudio.ai/vulnerability-disclosure
+- type: DomainSecurity
+  url: security/lm-studio-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
