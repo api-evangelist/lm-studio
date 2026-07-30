@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for LM Studio Local Server API
+  version: 1.0.0
+extends: openapi/lm-studio-server-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 3
+      x-apievangelist-notes: >-
+        Local, self-hosted LLM server. Native /api/v1 plus OpenAI- and
+        Anthropic-compatible surfaces. Auth is optional/loopback-local.
+  - target: $.tags
+    update:
+      - name: Agent Readiness
+        description: Tool use, structured output, and MCP-via-API for local agents.
+  - target: $.paths./api/v1/chat.post
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: write
+        note: Runs local inference; no external side effects but consumes compute.

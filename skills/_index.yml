@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/lm-studio-server-openapi.yml
+skills:
+  - file: lm-studio-load-and-chat.md
+    name: Load a model and run a chat
+    api: openapi/lm-studio-server-openapi.yml
+    operations: [listModels, loadModel, createChat]
+  - file: lm-studio-openai-drop-in.md
+    name: Use LM Studio as an OpenAI drop-in
+    api: openapi/lm-studio-server-openapi.yml
+    operations: [openaiListModels, openaiChatCompletions, openaiEmbeddings]

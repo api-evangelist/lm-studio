@@ -1,0 +1,49 @@
+generated: '2026-07-20'
+method: searched
+source: https://lmstudio.ai/docs/cli
+name: lms
+license: MIT
+repository: https://github.com/lmstudio-ai/lms
+install:
+  - method: bundled
+    note: Ships with the LM Studio desktop application.
+  - method: bootstrap
+    command: npx lmstudio install-cli
+groups:
+  - name: Local models
+    commands:
+      - { command: lms chat, description: Interactive terminal chat with a loaded model }
+      - { command: lms get, description: Download a model from the catalog }
+      - { command: lms import, description: Import an existing model file }
+      - { command: lms load, description: Load a model with GPU/context options }
+      - { command: lms unload, description: Unload a model from memory }
+      - { command: lms ls, description: List downloaded models }
+      - { command: lms ps, description: List currently loaded models }
+  - name: Serve
+    commands:
+      - { command: lms server start, description: Start the local HTTP server }
+      - { command: lms server stop, description: Stop the local HTTP server }
+      - { command: lms server status, description: Report server state }
+      - { command: lms log stream, description: Stream server/log messages }
+  - name: Daemon (headless)
+    commands:
+      - { command: lms daemon up, description: Start headless daemon }
+      - { command: lms daemon down, description: Stop headless daemon }
+      - { command: lms daemon status, description: Report daemon state }
+      - { command: lms daemon update, description: Update the daemon }
+  - name: LM Link
+    commands:
+      - { command: lms link enable, description: Enable LM Link cross-device routing }
+      - { command: lms link disable, description: Disable LM Link }
+      - { command: lms link status, description: Report link status }
+      - { command: lms link set-device-name, description: Set this device name }
+      - { command: lms link set-preferred-device, description: Choose preferred device }
+  - name: Develop & Publish (beta)
+    commands:
+      - { command: lms login, description: Authenticate to LM Studio Hub }
+      - { command: lms clone, description: Download artifacts from LM Studio Hub }
+      - { command: lms push, description: Upload artifacts to LM Studio Hub }
+      - { command: lms dev, description: Launch the plugin development server }
+  - name: Runtime
+    commands:
+      - { command: lms runtime, description: Manage the inference runtime }

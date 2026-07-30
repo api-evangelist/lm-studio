@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/lm-studio-server-openapi.yml
+format: openai-style-error
+envelope:
+  field: error
+  shape: '{ "error": { "message": string, "type": string, "code": string } }'
+  note: >-
+    LM Studio's local server returns OpenAI-style error objects, not RFC 9457
+    application/problem+json. The catalog below is derived from the documented
+    HTTP status codes on the local server API operations.
+problems:
+  - status: 400
+    title: Bad request
+    meaning: Malformed body, missing required field, or a reference to an unavailable model.
+    source_operation: openapi/lm-studio-server-openapi.yml#createChat
+  - status: 401
+    title: Unauthorized
+    meaning: A required API token was missing or invalid (only when token auth is enabled).
+    source_operation: openapi/lm-studio-server-openapi.yml#createChat
+  - status: 404
+    title: Not found
+    meaning: The referenced model or resource does not exist / is not loaded.
+    source_operation: openapi/lm-studio-server-openapi.yml#loadModel

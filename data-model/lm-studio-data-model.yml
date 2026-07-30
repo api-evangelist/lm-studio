@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/lm-studio-server-openapi.yml
+entities:
+  - name: Model
+    description: A local LLM / embeddings / vision model known to the instance.
+    key_fields: [id, type, arch, state, max_context_length]
+  - name: Chat
+    description: A chat inference request/response over a loaded model.
+    key_fields: [id, model, choices, stats, usage]
+  - name: Message
+    description: A single chat turn (system/user/assistant/tool).
+    key_fields: [role, content]
+  - name: GenerationStats
+    description: Performance metrics attached to a native chat response.
+    key_fields: [tokens_per_second, time_to_first_token, generation_time, stop_reason]
+  - name: DownloadStatus
+    description: Progress record for a model download.
+    key_fields: [model, progress, state]
+relationships:
+  - from: Chat
+    to: Model
+    type: belongs_to
+    via: model
+  - from: Chat
+    to: Message
+    type: has_many
+    via: messages
+  - from: Chat
+    to: GenerationStats
+    type: has_one
+    via: stats
+  - from: DownloadStatus
+    to: Model
+    type: belongs_to
+    via: model

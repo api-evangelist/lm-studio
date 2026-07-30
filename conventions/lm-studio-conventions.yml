@@ -1,0 +1,55 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/lm-studio-server-openapi.yml + https://lmstudio.ai/docs
+authentication:
+  style: optional-bearer
+  detail: >-
+    Loopback-local by default with no auth; optional API token (bearer) on the native
+    /api/v1 surface. See authentication/lm-studio-authentication.yml.
+base_url:
+  default: http://localhost:1234
+  configurable: true
+  note: Host/port set in the app or via `lms server start`.
+api_families:
+  - name: native
+    prefix: /api/v1
+    description: LM Studio REST API (beta) with generation stats and model lifecycle.
+  - name: openai-compatible
+    prefix: /v1
+    description: Drop-in for OpenAI clients by changing the base URL.
+  - name: anthropic-compatible
+    prefix: /v1/messages
+    description: Drop-in for Anthropic clients.
+streaming:
+  supported: true
+  style: server-sent-events
+  trigger: '"stream": true in the request body'
+structured_output:
+  supported: true
+  mechanism: JSON schema via response_format (structured output enforcement).
+tool_use:
+  supported: true
+  mechanism: OpenAI-style tools / function calling; MCP tools via the app and "MCP via API".
+idempotency:
+  supported: false
+  note: >-
+    LM Studio's local server does not document an idempotency-key header. Model
+    load/unload/download are effectively idempotent by nature (loading a loaded model
+    is a no-op), but there is no published Idempotency-Key contract.
+pagination:
+  supported: false
+  note: Model listings are returned in full; there is no documented pagination.
+versioning:
+  scheme: uri-path
+  native: /api/v1
+  openai_compat: /v1
+error_envelope:
+  shape: openai-style
+  example_field: error.message
+  detail: >-
+    Errors follow the OpenAI-style { "error": { "message", "type", "code" } } envelope.
+    See errors/lm-studio-problem-types.yml.
+generation_stats:
+  supported: true
+  fields: [tokens_per_second, time_to_first_token, generation_time, stop_reason]
+  note: The native /api/v1 chat response includes LM Studio generation performance stats.

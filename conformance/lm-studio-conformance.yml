@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/lm-studio-server-openapi.yml + https://lmstudio.ai/docs
+standards:
+  - id: openai-chat-completions
+    conforms: true
+    evidence: Publishes OpenAI-compatible /v1/chat/completions, /v1/completions, /v1/embeddings, /v1/models, /v1/responses.
+  - id: anthropic-messages
+    conforms: true
+    evidence: Publishes an Anthropic-compatible /v1/messages endpoint.
+  - id: mcp
+    conforms: true
+    evidence: Acts as an MCP host/client (mcp.json) and exposes "MCP via API" on /api/v1.
+  - id: json-schema-structured-output
+    conforms: true
+    evidence: Structured-output enforcement via JSON schema (response_format).
+  - id: oauth2
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use the OpenAI-style error envelope (error.message / error.type / error.code),
+      not application/problem+json.
+  - id: sse-streaming
+    conforms: true
+    evidence: Streaming responses via server-sent events when stream=true.

@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://lmstudio.ai/docs/app/api/endpoints/rest
+docs: https://lmstudio.ai/docs/app/api/endpoints/rest
+summary:
+  types: [http]
+  http_schemes: [bearer]
+  default_posture: none
+  note: >-
+    The LM Studio local server runs on the developer's own machine (default
+    http://localhost:1234). By default it accepts unauthenticated requests over the
+    loopback interface. The native /api/v1 API adds OPTIONAL API-token authentication
+    that can be configured to require a bearer token — useful when the server is bound
+    to a non-loopback interface or exposed over LM Link. The OpenAI- and
+    Anthropic-compatible surfaces reuse the standard Authorization: Bearer header,
+    which existing OpenAI/Anthropic clients send but LM Studio does not require by
+    default.
+schemes:
+  - name: ApiToken
+    type: http
+    scheme: bearer
+    required: false
+    applies_to: [/api/v1]
+    sources: [openapi/lm-studio-server-openapi.yml]

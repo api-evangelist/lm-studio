@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/lm-studio-server-openapi.yml
+notes: >-
+  LM Studio acts as an MCP HOST/CLIENT — it loads external MCP servers (via mcp.json)
+  and exposes "MCP via API" through the native /api/v1 surface — rather than publishing
+  its own hosted, remote MCP server. No first-party remote MCP endpoint is published as
+  of this pass. The tool list below is a DERIVED candidate mapping of the local server
+  API operations to MCP tools, for use with an OpenAPI-to-MCP bridge against a running
+  LM Studio instance.
+server:
+  name: lm-studio
+  transport: http
+  url: http://localhost:1234
+tools:
+  - name: chat
+    description: Run chat inference against a loaded local model.
+    source_operation: openapi/lm-studio-server-openapi.yml#createChat
+  - name: list_models
+    description: List loaded and downloaded models.
+    source_operation: openapi/lm-studio-server-openapi.yml#listModels
+  - name: load_model
+    description: Load a model into memory.
+    source_operation: openapi/lm-studio-server-openapi.yml#loadModel
+  - name: unload_model
+    description: Unload a model from memory.
+    source_operation: openapi/lm-studio-server-openapi.yml#unloadModel
+  - name: download_model
+    description: Download a model from the catalog.
+    source_operation: openapi/lm-studio-server-openapi.yml#downloadModel
+  - name: get_download_status
+    description: Check model download progress.
+    source_operation: openapi/lm-studio-server-openapi.yml#getDownloadStatus

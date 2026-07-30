@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://lmstudio.ai/docs/sdk
+packages:
+  - language: typescript
+    registry: npm
+    name: "@lmstudio/sdk"
+    version: 1.5.0
+    url: https://www.npmjs.com/package/@lmstudio/sdk
+    install: npm install @lmstudio/sdk
+    repository: https://github.com/lmstudio-ai/lmstudio.js
+    official: true
+    description: LM Studio TypeScript / JavaScript SDK (lmstudio-js).
+  - language: python
+    registry: pypi
+    name: lmstudio
+    version: 1.5.0
+    url: https://pypi.org/project/lmstudio/
+    install: pip install lmstudio
+    repository: https://github.com/lmstudio-ai/lmstudio-python
+    official: true
+    description: LM Studio Python SDK (lmstudio-python).
+  - language: typescript
+    registry: npm
+    name: "@lmstudio/lms"
+    url: https://github.com/lmstudio-ai/lms
+    install: npx lmstudio install-cli
+    repository: https://github.com/lmstudio-ai/lms
+    official: true
+    description: >-
+      lms — the LM Studio command-line tool (MIT licensed). Ships bundled with the
+      LM Studio desktop app; see cli/ for the command surface.

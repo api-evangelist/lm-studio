@@ -1,0 +1,20 @@
+{
+  "provider": "lm-studio",
+  "sources": [
+    "lm-studio-anthropic-compatibility-api-openapi.yml",
+    "lm-studio-chat-api-openapi.yml",
+    "lm-studio-models-api-openapi.yml",
+    "lm-studio-openai-compatibility-api-openapi.yml"
+  ],
+  "outputs": [
+    "lm-studio-anthropic-compatibility-api-openapi.yml",
+    "lm-studio-chat-api-openapi.yml",
+    "lm-studio-models-api-openapi.yml",
+    "lm-studio-openai-compatibility-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

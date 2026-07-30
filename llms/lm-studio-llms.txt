@@ -1,0 +1,21 @@
+# LM Studio
+
+> LM Studio is a desktop application for discovering, downloading, and running large language models (Llama, DeepSeek, Phi, Qwen, and others) locally on macOS, Windows, and Linux. It runs GGUF and MLX models via llama.cpp and Apple MLX, and exposes a local HTTP server with a native REST API (beta), OpenAI-compatible endpoints, and an Anthropic-compatible endpoint, plus Python and TypeScript SDKs, the `lms` CLI, and MCP support.
+
+## APIs
+- [LM Studio REST API (beta)](https://lmstudio.ai/docs/app/api/endpoints/rest): Native /api/v1 — chat, model load/unload/download, generation stats, MCP via API, optional token auth.
+- [OpenAI compatibility API](https://lmstudio.ai/docs/app/api/endpoints/openai): /v1/chat/completions, /v1/completions, /v1/embeddings, /v1/models, /v1/responses at http://localhost:1234/v1.
+- [Anthropic compatibility](https://lmstudio.ai/docs/app/api/endpoints/rest): /v1/messages.
+
+## Specs
+- [Local Server OpenAPI (API Evangelist)](https://raw.githubusercontent.com/api-evangelist/lm-studio/refs/heads/main/openapi/lm-studio-server-openapi.yml)
+
+## SDKs & tooling
+- [Python SDK (lmstudio)](https://pypi.org/project/lmstudio/): pip install lmstudio
+- [TypeScript SDK (@lmstudio/sdk)](https://www.npmjs.com/package/@lmstudio/sdk): npm install @lmstudio/sdk
+- [lms CLI](https://github.com/lmstudio-ai/lms): bundled with the app; MIT licensed.
+
+## Docs
+- [Developer docs](https://lmstudio.ai/docs)
+- [GitHub organization](https://github.com/lmstudio-ai)
+- [Blog / release notes](https://lmstudio.ai/blog)

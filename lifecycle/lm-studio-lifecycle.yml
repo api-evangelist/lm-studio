@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://lmstudio.ai/docs/app/api/endpoints/rest
+versioning:
+  scheme: uri-path
+  native_current: /api/v1
+  native_status: beta
+  openai_compat: /v1
+  docs: https://lmstudio.ai/docs/app/api/endpoints/rest
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation/Sunset (RFC 8594) policy is published for the local server API.
+sla:
+  url: null
+  note: >-
+    Not applicable — the server runs on the developer's own machine; there is no hosted
+    uptime SLA.
+status_page: null
+release_notes: https://lmstudio.ai/blog
+deprecated_operations: []
