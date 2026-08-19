@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LM Studio Local Server Anthropic Compatibility OpenAI Compatibility API",
+    "version": "1.0.0-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OpenAI Compatibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List models (OpenAI-compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1234/v1/models"
+          },
+          "docs": "List models (OpenAI-compatible)"
+        },
+        {
+          "info": {
+            "name": "Create chat completion (OpenAI-compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create chat completion (OpenAI-compatible)"
+        },
+        {
+          "info": {
+            "name": "Create text completion (OpenAI-compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create text completion (OpenAI-compatible)"
+        },
+        {
+          "info": {
+            "name": "Create embeddings (OpenAI-compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/v1/embeddings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create embeddings (OpenAI-compatible)"
+        },
+        {
+          "info": {
+            "name": "Create a response (OpenAI Responses API compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/v1/responses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a response (OpenAI Responses API compatible)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

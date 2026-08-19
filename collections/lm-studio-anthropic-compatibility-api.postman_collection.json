@@ -1,0 +1,112 @@
+{
+  "item": [
+    {
+      "id": "9cb7aa74-2328-41a8-bf67-e8f240cf0d5d",
+      "name": "Anthropic Compatibility",
+      "description": {
+        "content": "Anthropic-compatible messages endpoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c73fbad3-df2c-42ea-8e51-2c2701ecc36e",
+          "name": "Create a message (Anthropic-compatible)",
+          "request": {
+            "name": "Create a message (Anthropic-compatible)",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "308b9b0c-be45-41a6-98c2-e6176268ad2a",
+              "name": "Anthropic-style message response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"tool\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"tool\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:1234",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "80fe857e-798c-450e-9944-e08654e86ed0",
+    "name": "LM Studio Local Server Anthropic Compatibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LM Studio runs large language models locally and exposes a local HTTP server with three families of endpoints: the native LM Studio REST API (beta) under `/api/v1`, an OpenAI-compatible surface under `/v1`, and an Anthropic-compatible surface (`/v1/messages`). The server runs on the developer's own machine (default `http://localhost:1234`). The native `/api/v1` API adds LM Studio-specific capabilities such as MCP via API, stateful chats, model download/load/unload, generation stats (tokens-per-second, time-to-first-token), and optional API-token authentication. Endpoints and paths are transcribed from the public LM Studio developer documentation; request/response bodies follow the documented OpenAI-style message shapes.\n\nContact Support:\n Name: LM Studio",
+      "type": "text/plain"
+    }
+  }
+}

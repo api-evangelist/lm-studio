@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LM Studio Local Server Anthropic Compatibility API",
+    "version": "1.0.0-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Anthropic Compatibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a message (Anthropic-compatible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/v1/messages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a message (Anthropic-compatible)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LM Studio Local Server Anthropic Compatibility Models API",
+    "version": "1.0.0-beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List loaded and downloaded models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1234/api/v1/models"
+          },
+          "docs": "List loaded and downloaded models"
+        },
+        {
+          "info": {
+            "name": "Load a model into memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/api/v1/models/load",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Load a model into memory"
+        },
+        {
+          "info": {
+            "name": "Unload a model from memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/api/v1/models/unload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unload a model from memory"
+        },
+        {
+          "info": {
+            "name": "Download a model from the LM Studio / Hugging Face catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1234/api/v1/models/download",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download a model from the LM Studio / Hugging Face catalog"
+        },
+        {
+          "info": {
+            "name": "Check model download progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1234/api/v1/models/download/status"
+          },
+          "docs": "Check model download progress"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
