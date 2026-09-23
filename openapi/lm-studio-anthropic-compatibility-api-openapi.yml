@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: LM Studio Local Server Anthropic Compatibility API
   version: 1.0.0-beta
-  description: 'LM Studio runs large language models locally and exposes a local HTTP server with three families of endpoints: the native LM Studio REST API (beta) under `/api/v1`, an OpenAI-compatible surface under `/v1`, and an Anthropic-compatible surface (`/v1/messages`). The server runs on the developer''s own machine (default `http://localhost:1234`). The native `/api/v1` API adds LM Studio-specific capabilities such as MCP via API, stateful chats, model download/load/unload, generation stats (tokens-per-second, time-to-first-token), and optional API-token authentication. Endpoints and paths are transcribed from the public LM Studio developer documentation; request/response bodies follow the documented OpenAI-style message shapes.'
+  description: 'LM Studio runs large language models locally and exposes a local HTTP server with three families of endpoints: the native LM Studio REST API (beta) under `/api/v1`, an OpenAI-compatible surface under `/v1`, and an Anthropic-compatible surface (`/v1/messages`).'
   contact:
     name: LM Studio
     url: https://lmstudio.ai/docs
