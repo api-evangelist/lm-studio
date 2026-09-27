@@ -50,7 +50,7 @@ tags:
 - Company
 - Artificial Intelligence
 - Local LLM
-- Machine-Learning
+- Machine Learning
 - Inference
 - Developer Tools
 - LLM
@@ -68,6 +68,7 @@ tags_raw:
 - MCP
 - SDK
 - Desktop Application
+- Machine-Learning
 apis:
 - aid: lm-studio:lm-studio-anthropic-compatibility-api
   name: LM Studio Anthropic Compatibility API

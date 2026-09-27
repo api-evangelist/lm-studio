@@ -107,6 +107,12 @@ paths:
                 $ref: '#/components/schemas/DownloadStatus'
 components:
   responses:
+    Unauthorized:
+      description: A required API token was missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     NotFound:
       description: The referenced model or resource does not exist.
       content:
@@ -119,13 +125,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: A required API token was missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ModelDownloadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Model identifier / Hugging Face repo to download.
+      required:
+      - model
+    ModelLoadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Model key/identifier to load.
+        config:
+          type: object
+          description: Optional load configuration (context length, GPU offload).
+      required:
+      - model
+    DownloadStatus:
+      type: object
+      properties:
+        model:
+          type: string
+        progress:
+          type: number
+        state:
+          type: string
     Model:
       type: object
       properties:
@@ -148,31 +176,11 @@ components:
           - not-loaded
         max_context_length:
           type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            type:
-              type: string
-            code:
-              type: string
     ModelUnloadRequest:
       type: object
       properties:
         model:
           type: string
-      required:
-      - model
-    ModelDownloadRequest:
-      type: object
-      properties:
-        model:
-          type: string
-          description: Model identifier / Hugging Face repo to download.
       required:
       - model
     ModelList:
@@ -185,26 +193,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Model'
-    DownloadStatus:
+    Error:
       type: object
       properties:
-        model:
-          type: string
-        progress:
-          type: number
-        state:
-          type: string
-    ModelLoadRequest:
-      type: object
-      properties:
-        model:
-          type: string
-          description: Model key/identifier to load.
-        config:
+        error:
           type: object
-          description: Optional load configuration (context length, GPU offload).
-      required:
-      - model
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
   securitySchemes:
     ApiToken:
       type: http

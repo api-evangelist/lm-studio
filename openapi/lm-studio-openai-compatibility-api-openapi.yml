@@ -133,90 +133,7 @@ paths:
         '200':
           description: Response object.
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or referenced an unavailable model.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Model:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        type:
-          type: string
-          enum:
-          - llm
-          - embeddings
-          - vlm
-        arch:
-          type: string
-        state:
-          type: string
-          enum:
-          - loaded
-          - not-loaded
-        max_context_length:
-          type: integer
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          type: string
-      required:
-      - role
-      - content
-    ChatRequest:
-      type: object
-      properties:
-        model:
-          type: string
-          description: Identifier of a loaded model.
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        stream:
-          type: boolean
-          default: false
-        temperature:
-          type: number
-        max_tokens:
-          type: integer
-        tools:
-          type: array
-          items:
-            type: object
-        response_format:
-          type: object
-          description: Structured-output enforcement via JSON schema.
-      required:
-      - model
-      - messages
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            type:
-              type: string
-            code:
-              type: string
     ChatResponse:
       type: object
       properties:
@@ -246,6 +163,92 @@ components:
               type: integer
             total_tokens:
               type: integer
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        type:
+          type: string
+          enum:
+          - llm
+          - embeddings
+          - vlm
+        arch:
+          type: string
+        state:
+          type: string
+          enum:
+          - loaded
+          - not-loaded
+        max_context_length:
+          type: integer
+    ModelList:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    ChatRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Identifier of a loaded model.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        stream:
+          type: boolean
+          default: false
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+        tools:
+          type: array
+          items:
+            type: object
+        response_format:
+          type: object
+          description: Structured-output enforcement via JSON schema.
+      required:
+      - model
+      - messages
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+      required:
+      - role
+      - content
     GenerationStats:
       type: object
       description: LM Studio generation performance metrics.
@@ -258,16 +261,13 @@ components:
           type: number
         stop_reason:
           type: string
-    ModelList:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
+  responses:
+    BadRequest:
+      description: The request was malformed or referenced an unavailable model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiToken:
       type: http
