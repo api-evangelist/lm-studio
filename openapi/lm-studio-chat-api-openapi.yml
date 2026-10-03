@@ -48,6 +48,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    GenerationStats:
+      type: object
+      description: LM Studio generation performance metrics.
+      properties:
+        tokens_per_second:
+          type: number
+        time_to_first_token:
+          type: number
+        generation_time:
+          type: number
+        stop_reason:
+          type: string
     ChatResponse:
       type: object
       properties:
@@ -77,6 +89,21 @@ components:
               type: integer
             total_tokens:
               type: integer
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+      required:
+      - role
+      - content
     Error:
       type: object
       properties:
@@ -116,34 +143,13 @@ components:
       required:
       - model
       - messages
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          type: string
-      required:
-      - role
-      - content
-    GenerationStats:
-      type: object
-      description: LM Studio generation performance metrics.
-      properties:
-        tokens_per_second:
-          type: number
-        time_to_first_token:
-          type: number
-        generation_time:
-          type: number
-        stop_reason:
-          type: string
   responses:
+    BadRequest:
+      description: The request was malformed or referenced an unavailable model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     NotFound:
       description: The referenced model or resource does not exist.
       content:
@@ -152,12 +158,6 @@ components:
             $ref: '#/components/schemas/Error'
     Unauthorized:
       description: A required API token was missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or referenced an unavailable model.
       content:
         application/json:
           schema:

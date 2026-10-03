@@ -106,25 +106,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/DownloadStatus'
 components:
-  responses:
-    Unauthorized:
-      description: A required API token was missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The referenced model or resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or referenced an unavailable model.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     ModelDownloadRequest:
       type: object
@@ -134,26 +115,13 @@ components:
           description: Model identifier / Hugging Face repo to download.
       required:
       - model
-    ModelLoadRequest:
+    ModelUnloadRequest:
       type: object
       properties:
         model:
           type: string
-          description: Model key/identifier to load.
-        config:
-          type: object
-          description: Optional load configuration (context length, GPU offload).
       required:
       - model
-    DownloadStatus:
-      type: object
-      properties:
-        model:
-          type: string
-        progress:
-          type: number
-        state:
-          type: string
     Model:
       type: object
       properties:
@@ -176,13 +144,6 @@ components:
           - not-loaded
         max_context_length:
           type: integer
-    ModelUnloadRequest:
-      type: object
-      properties:
-        model:
-          type: string
-      required:
-      - model
     ModelList:
       type: object
       properties:
@@ -193,6 +154,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Model'
+    DownloadStatus:
+      type: object
+      properties:
+        model:
+          type: string
+        progress:
+          type: number
+        state:
+          type: string
     Error:
       type: object
       properties:
@@ -205,6 +175,36 @@ components:
               type: string
             code:
               type: string
+    ModelLoadRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Model key/identifier to load.
+        config:
+          type: object
+          description: Optional load configuration (context length, GPU offload).
+      required:
+      - model
+  responses:
+    NotFound:
+      description: The referenced model or resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or referenced an unavailable model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: A required API token was missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiToken:
       type: http
