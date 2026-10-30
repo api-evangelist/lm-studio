@@ -64,6 +64,118 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-LM Studio is a company surfaced as a portfolio company of matrix-partners and added to the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment pipeline.
+LM Studio is a desktop application for discovering, downloading, and running large language models (Llama, DeepSeek, Phi, Qwen, gpt-oss, and others) locally on macOS, Windows, and Linux. It runs GGUF and MLX models via llama.cpp and Apple's MLX engine, and ships a local HTTP server that developers can drive from their own apps: a native LM Studio REST API (beta) under /api/v1 with generation stats, model load/unload/download and MCP-via-API, an OpenAI-compatible surface under /v1 (chat/completions, completions, embeddings, models, responses), and an Anthropic-compatible /v1/messages endpoint. It is complemented by Python (lmstudio) and TypeScript (@lmstudio/sdk) SDKs, the MIT-licensed lms command-line tool, headless/daemon operation, LM Link cross-device routing, and MCP host support. Backed by Matrix Partners.
 
-Backed by: matrix-partners — https://lmstudio.ai
+**Areas:** Company · Artificial Intelligence · Local LLM · Machine Learning · Inference · Developer Tools · LLM · MCP · SDK · Desktop Application
+
+## LM Studio on APIs.io
+
+Everything profiled for LM Studio is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lm-studio/](https://apis.io/providers/lm-studio/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [LM Studio Anthropic Compatibility API](https://apis.io/apis/lm-studio/lm-studio-anthropic-compatibility-api/) — Anthropic-compatible messages endpoint.
+- [LM Studio Chat API](https://apis.io/apis/lm-studio/lm-studio-chat-api/) — Native LM Studio chat inference with generation stats.
+- [LM Studio Models API](https://apis.io/apis/lm-studio/lm-studio-models-api/) — List, load, unload, and download local models.
+- [LM Studio OpenAI Compatibility API](https://apis.io/apis/lm-studio/lm-studio-openai-compatibility-api/) — OpenAI-compatible endpoints for reuse of existing OpenAI clients.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [lm-studio](https://apis.io/servers/lm-studio/lm-studio/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [LM Studio Local Server Anthropic Compatibility API](https://apis.io/collections/lm-studio/open-lm-studio-anthropic-compatibility-api/)
+- [LM Studio Local Server Anthropic Compatibility Chat API](https://apis.io/collections/lm-studio/open-lm-studio-chat-api/)
+- [LM Studio Local Server Anthropic Compatibility Models API](https://apis.io/collections/lm-studio/open-lm-studio-models-api/)
+- [LM Studio Local Server Anthropic Compatibility OpenAI Compatibility API](https://apis.io/collections/lm-studio/open-lm-studio-openai-compatibility-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Lm Studio Server Overlay](https://apis.io/overlays/lm-studio/lm-studio-server-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Lm Studio Authentication](https://apis.io/security/lm-studio/lm-studio-authentication/)
+- [Lm Studio Domain Security](https://apis.io/security/lm-studio/lm-studio-domain-security/)
+- [Lm Studio Vulnerability Disclosure](https://apis.io/security/lm-studio/lm-studio-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://lmstudio.ai)
+- [Documentation](https://lmstudio.ai/docs)
+- [Getting started](https://lmstudio.ai/docs/app)
+- [API reference](https://lmstudio.ai/docs/app/api/endpoints/rest)
+- [Support](https://github.com/lmstudio-ai/lmstudio-bug-tracker)
+- [Blog](https://lmstudio.ai/blog)
+- [Security](https://lmstudio.ai/vulnerability-disclosure)
+- [Terms of service](https://lmstudio.ai/terms)
+- [Privacy policy](https://lmstudio.ai/privacy)
+- [GitHub](https://github.com/lmstudio-ai)
+
+## API Evangelist rating
+
+**Kin Score 28.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 11.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 21.1 |
+
+**Agent readiness 17.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 28.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lm-studio/](https://apis.io/providers/lm-studio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LM Studio: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lm-studio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
